@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import "./App.css";
+import GrandFather from "./components/GrandFather/GrandFather";
+
+export const PhoneContext = createContext("mobile");
 
 function App() {
+  const [houses, setHouses] = useState(2);
+
+  const phone = "iPhone";
+  const car = "BMW";
+
+  const clickHandler = (houseCount) => {
+    setHouses(houseCount);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PhoneContext.Provider value={[phone, houses, car]}>
+      <div className="App">
+        <GrandFather house={houses} clickHandler={clickHandler}></GrandFather>
+      </div>
+    </PhoneContext.Provider>
   );
 }
 
